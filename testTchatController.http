@@ -1,0 +1,39 @@
+POST http://localhost:8080/tchat/saveMessage
+Content-Type: application/json
+
+{
+  "pseudo": "aa",
+  "message": "cOUCOU"
+}
+
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+
+
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+
+
+
+###
+GET http://localhost:8080/tchat/allMessages
