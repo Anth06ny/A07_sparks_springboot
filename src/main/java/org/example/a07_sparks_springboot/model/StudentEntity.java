@@ -12,4 +12,8 @@ import lombok.NoArgsConstructor;
 public class StudentEntity {
     private int note;
     private String name;
+
+    public String toto() {
+        return note + " " + name;
+    }
 }

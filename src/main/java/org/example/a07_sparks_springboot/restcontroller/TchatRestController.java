@@ -56,7 +56,7 @@ public class TchatRestController {
     }
 
     //Ne garde que les 5 derniers messages toutes les minutes
-    @Scheduled(fixedRate = 6000)
+    @Scheduled(fixedRate = 60000)
     public void nettoyage() {
         System.out.println("Nettoyage : " + list.size() + " messages");
         if (list.size() > 5) {
