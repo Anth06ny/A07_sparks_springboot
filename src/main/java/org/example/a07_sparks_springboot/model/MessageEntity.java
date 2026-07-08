@@ -20,7 +20,7 @@ public class MessageEntity {
     @Id
     ///ID auto incrémenté
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Schema(description = "Contenu du message", example = "un message")
     @NotBlank(message = "Il faut un pseudo")
