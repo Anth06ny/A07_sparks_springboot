@@ -2,23 +2,35 @@ package org.example.a07_sparks_springboot.restcontroller;
 
 import jakarta.validation.Valid;
 import org.example.a07_sparks_springboot.model.MessageEntity;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.example.a07_sparks_springboot.service.MessageService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/tchat")
 public class TchatRestController {
 
-    private ArrayList<MessageEntity> list = new ArrayList<>();
+    @Value("${my.custom.value}")
+    String customProperty;
+
+    private final MessageService messageService;
+
+    public TchatRestController(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
 
     //http://localhost:8080/tchat/saveMessage
     @PostMapping("/saveMessage")
-    public void saveMessage(@Valid  @RequestBody MessageEntity message) {
+    public void saveMessage(@Valid @RequestBody MessageEntity message) {
         System.out.println("/saveMessage : " + message.getMessage() + " : " + message.getPseudo());
-        list.add(message);
+
+        messageService.addMessage(message);
     }
+
+
 
 //    //http://localhost:8080/tchat/addMessage?pseudo=toto&message=coucou
 //    @GetMapping("/addMessage")
@@ -34,34 +46,28 @@ public class TchatRestController {
 
     //http://localhost:8080/tchat/addMessage?pseudo=toto&message=coucou
     @GetMapping("/addMessage")
-    public ArrayList<MessageEntity> addMessage(@Valid MessageEntity message) {
-        System.out.println("/addMessage : " + message );
+    public List<MessageEntity> addMessage(@Valid MessageEntity message) {
+        System.out.println("/addMessage : " + message);
 
-        list.add(message);
+        messageService.addMessage(message);
 
-        return list;
+        return messageService.getAll();
     }
 
     @GetMapping("/allMessages")
-    public ArrayList<MessageEntity> allMessages() {
+    public List<MessageEntity> allMessages() {
         System.out.println("/allMessages");
 
-        //pour ne retourner que les 10 derniers
-        ArrayList<MessageEntity> toReturn = new ArrayList<>();
-        for (int i = Math.max(list.size() - 10, 0); i < list.size(); i++) {
-            toReturn.add(list.get(i));
-        }
-
-        return toReturn;
+        return messageService.last10();
     }
 
-    //Ne garde que les 5 derniers messages toutes les minutes
-    @Scheduled(fixedRate = 60000)
-    public void nettoyage() {
-        System.out.println("Nettoyage : " + list.size() + " messages");
-        if (list.size() > 5) {
-            list = new ArrayList<>(list.subList(list.size() - 5, list.size()));
-        }
-    }
+//    //Ne garde que les 5 derniers messages toutes les minutes
+//    @Scheduled(fixedRate = 60000)
+//    public void nettoyage() {
+//        System.out.println("Nettoyage : " + list.size() + " messages");
+//        if (list.size() > 5) {
+//            list = new ArrayList<>(list.subList(list.size() - 5, list.size()));
+//        }
+//    }
 
 }

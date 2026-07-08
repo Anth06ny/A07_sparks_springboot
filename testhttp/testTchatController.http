@@ -1,0 +1,27 @@
+POST http://localhost:8080/tchat/saveMessage
+Content-Type: application/json
+Authorization: Basic Admin Admin
+
+{
+  "pseudo": "aaa",
+  "message": "Coucou"
+}
+
+###
+
+POST http://localhost:8080/tchat/saveMessage2
+Content-Type: application/json
+
+{
+  "pseudo": "aa",
+  "message": "Coucou"
+}
+
+###
+GET http://localhost:8080/tchat/addMessage?pseudo=aaa&message=coucou
+
+
+"
+
+###
+GET http://localhost:8080/tchat/allMessages
